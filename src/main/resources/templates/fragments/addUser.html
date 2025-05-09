@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="newUserForm">
+    <div class="card mt-3 shadow-sm p-4">
+        <h5 class="fw-bold">Add new user</h5>
+        <form th:action="@{/admin/add}" method="post" class="d-flex flex-column align-items-center">
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">First name</label>
+                <input type="text" name="firstName" class="form-control bg-warning-subtle">
+            </div>
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Last name</label>
+                <input type="text" name="lastName" class="form-control bg-warning-subtle">
+            </div>
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Age</label>
+                <input type="number" name="age" class="form-control">
+            </div>
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Email</label>
+                <input type="email" name="email" class="form-control bg-warning-subtle">
+            </div>
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Password</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Role</label>
+                <select multiple name="roles" class="form-control">
+                    <option th:each="role : ${allRoles}"
+                            th:value="${role.name.replace('ROLE_', '')}"
+                            th:text="${role.name.replace('ROLE_', '')}">
+                    </option>
+                </select>
+            </div>
+            <div class="text-center w-50">
+                <button type="submit" class="btn btn-success w-100">Add new user</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

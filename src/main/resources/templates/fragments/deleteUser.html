@@ -1,0 +1,54 @@
+<!-- fragments/deleteUser.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="deleteUserModal(user)">
+    <div class="modal fade" th:id="'deleteModal__' + ${user.id}" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content px-4 py-3">
+                <form th:action="@{/admin/delete}" method="post">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title">Delete user</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <input type="hidden" name="id" th:value="${user.id}" />
+
+                        <div class="mb-2">
+                            <label class="form-label d-block fw-semibold">ID</label>
+                            <input type="text" th:value="${user.id}" class="form-control text-center" disabled />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label d-block fw-semibold">First name</label>
+                            <input type="text" th:value="${user.firstName}" class="form-control text-center" disabled />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label d-block fw-semibold">Last name</label>
+                            <input type="text" th:value="${user.lastName}" class="form-control text-center" disabled />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label d-block fw-semibold">Age</label>
+                            <input type="number" th:value="${user.age}" class="form-control text-center" disabled />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label d-block fw-semibold">Email</label>
+                            <input type="email" th:value="${user.email}" class="form-control text-center" disabled />
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label d-block fw-semibold">Role</label>
+                            <select class="form-select text-center" disabled>
+                                <option th:each="r : ${user.roles}" th:text="${r.name.replace('ROLE_', '')}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
