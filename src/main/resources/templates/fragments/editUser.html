@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="editUserModal(user, allRoles)">
+    <div class="modal fade" th:id="'editModal__' + ${user.id}" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content px-4 py-3">
+                <form th:action="@{/admin/edit}" method="post">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title">Edit user</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+
+                        <input type="hidden" name="id" th:value="${user.id}" />
+
+                        <div class="mb-3">
+                            <label class="form-label d-block fw-semibold">ID</label>
+                            <input type="text" th:value="${user.id}" class="form-control text-center" disabled />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label d-block fw-semibold">First name</label>
+                            <input type="text" name="firstName" th:value="${user.firstName}" class="form-control text-center" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label d-block fw-semibold">Last name</label>
+                            <input type="text" name="lastName" th:value="${user.lastName}" class="form-control text-center" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label d-block fw-semibold">Age</label>
+                            <input type="number" name="age" th:value="${user.age}" class="form-control text-center" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label d-block fw-semibold">Email</label>
+                            <input type="email" name="email" th:value="${user.email}" class="form-control text-center" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label d-block fw-semibold">Password</label>
+                            <input type="password" name="password" class="form-control text-center" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label d-block fw-semibold">Role</label>
+                            <select multiple class="form-select text-center" name="roleIds" size="2">
+                                <option th:each="role : ${allRoles}"
+                                        th:value="${role.id}"
+                                        th:text="${role.name.replace('ROLE_', '')}"
+                                        th:selected="${user.roles.![id].contains(role.id)}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 justify-content-end">
+                        <button type="submit" class="btn btn-primary me-2">Edit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

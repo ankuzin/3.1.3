@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <!-- Подключение Bootstrap (если нужно) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:fragment="newUserForm">
+    <div class="card mt-3 shadow-sm p-4">
+        <h5 class="fw-bold">Add new user</h5>
+        <form th:action="@{/admin/add}" method="post" class="d-flex flex-column align-items-center">
+            <!-- Основные поля пользователя -->
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">First name</label>
+                <input type="text" name="firstName" class="form-control bg-warning-subtle" required>
+            </div>
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Last name</label>
+                <input type="text" name="lastName" class="form-control bg-warning-subtle" required>
+            </div>
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Age</label>
+                <input type="number" name="age" class="form-control" min="1" required>
+            </div>
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Email</label>
+                <input type="email" name="email" class="form-control bg-warning-subtle" required>
+            </div>
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+
+            <!-- Исправленный блок выбора ролей -->
+            <div class="mb-3 w-50 text-center">
+                <label class="form-label fw-bold">Roles</label>
+                <select multiple name="roles" class="form-select" required
+                        title="Hold Ctrl/Cmd to select multiple roles">
+                    <option th:each="role : ${allRoles}"
+                            th:value="${role.id}"
+                            th:text="${role.name.replace('ROLE_', '')}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="text-center w-50">
+                <button type="submit" class="btn btn-success w-100">Add new user</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
